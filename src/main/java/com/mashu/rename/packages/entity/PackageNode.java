@@ -131,6 +131,39 @@ public class PackageNode {
 
     }
 
+    /**
+     * 递归找出该包下所有的类
+     * @param packageName
+     * @return
+     */
+    public List<ClassNode> getPackageClasses(String packageName) {
+        // 找到对应的根节点
+        PackageNode rootPackage = getPackageNode(packageName);
+        if (null == rootPackage) {
+            return new ArrayList<>();
+        }
+        return rootPackage.getChildrenClassNodes();
+    }
+
+    /**
+     * 递归获取包内所有类
+     * @return
+     */
+    private List<ClassNode> getChildrenClassNodes() {
+        List<ClassNode> childrenClassNodes = new ArrayList<>();
+        // 获取本级类
+        if (null != classNodes) {
+            childrenClassNodes.addAll(classNodes);
+        }
+        // 获取下级类
+        if (null != this.getPackageNodes()) {
+            this.getPackageNodes().forEach(packageNode -> {
+                childrenClassNodes.addAll(packageNode.getChildrenClassNodes());
+            });
+        }
+        return childrenClassNodes;
+    }
+
     private boolean isVirtualPackage() {
         return EMPTY_NAME.equals(name);
     }

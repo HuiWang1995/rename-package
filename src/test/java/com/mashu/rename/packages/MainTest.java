@@ -11,8 +11,14 @@ public class MainTest {
         projectIndex.scanAllProjectIndex();
         String packageName = "com.mashu.rename.packages.request";
         String packageName2 = "com.mashu.rename.packages";
+        String packageName3 = "com.mashu.rename.packages.service";
         log.info("是否存在包[{}]: {}", packageName, projectIndex.getPackageNode(packageName) != null);
         log.info("是否存在中间包[{}]: {}", packageName2, projectIndex.getPackageNode(packageName2) != null);
+        log.info("是否存在包下的类[{}]: {}", packageName, !projectIndex.getPackageClasses(packageName).isEmpty());
+        log.info("是否存在中间包下的类[{}]: {}", packageName3, !projectIndex.getPackageClasses(packageName3).isEmpty());
+
+
+
         projectIndex.printProjectInfo();
     }
 }

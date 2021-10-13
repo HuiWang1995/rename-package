@@ -115,6 +115,18 @@ public class ProjectIndex {
     }
 
     /**
+     * 查找Main文件夹下的包的所有类对象
+     * @param packageName
+     * @return
+     */
+    public List<ClassNode> getPackageClasses(String packageName) {
+        return virtualMainPackageNode.getPackageClasses(packageName);
+    }
+
+
+
+
+    /**
      * 打印工程信息，忽略空包、忽略测试文件夹
      */
     public void printProjectInfo() {
